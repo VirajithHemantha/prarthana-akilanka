@@ -16,7 +16,9 @@ export function AdminPage() {
   const [prefix, setPrefix] = useState('Mr. & Mrs.');
   const [guestName, setGuestName] = useState('');
   const [generatedLink, setGeneratedLink] = useState('');
-  const [copied, setCopied] = useState(false);
+  const [copiedLink, setCopiedLink] = useState(false);
+  const [copiedMessage, setCopiedMessage] = useState(false);
+  const [fullMessage, setFullMessage] = useState('');
 
   const handleGenerate = () => {
     if (!guestName.trim()) return;
@@ -28,16 +30,31 @@ export function AdminPage() {
     
     const link = `${baseUrl}/?${params.toString()}`;
     setGeneratedLink(link);
-    setCopied(false);
+    
+    const message = `Dear ${prefix} ${guestName.trim()}❤️\n\nWith joyful hearts, we warmly invite you and your family to celebrate one of the most special days of our lives as we begin our journey together.\n\nPlease view our wedding invitation and all the event details through the link below 🌐:\n\n${link}\n\nYour presence would truly mean the world to us, and we would be honored to celebrate this beautiful moment together.\n\nWith love,\n❤️ Prarthana & Akilanka`;
+    
+    setFullMessage(message);
+    setCopiedLink(false);
+    setCopiedMessage(false);
   };
 
-  const handleCopy = async () => {
+  const handleCopyLink = async () => {
     try {
       await navigator.clipboard.writeText(generatedLink);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 2000);
     } catch (err) {
-      console.error('Failed to copy text: ', err);
+      console.error('Failed to copy link: ', err);
+    }
+  };
+
+  const handleCopyMessage = async () => {
+    try {
+      await navigator.clipboard.writeText(fullMessage);
+      setCopiedMessage(true);
+      setTimeout(() => setCopiedMessage(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy message: ', err);
     }
   };
 
@@ -91,23 +108,30 @@ export function AdminPage() {
             </button>
 
             {generatedLink && (
-              <div className="mt-8 p-4 bg-brand-ivory rounded-xl border border-brand-beige/50 animate-in fade-in slide-in-from-bottom-2">
-                <p className="text-sm text-stone-600 mb-2 font-medium tracking-wide">Generated Link:</p>
-                <div className="flex gap-2 items-center">
-                  <input
-                    type="text"
-                    readOnly
-                    value={generatedLink}
-                    className="flex-1 w-full px-3 py-2 text-sm bg-white border border-brand-beige/50 rounded-md focus:outline-none text-stone-600 font-sans"
-                  />
-                  <button
-                    onClick={handleCopy}
-                    className="flex-shrink-0 p-2 text-brand-beige-deep hover:bg-brand-beige/20 rounded-md transition-colors"
-                    title="Copy to clipboard"
-                  >
-                    {copied ? <CheckCircle className="w-5 h-5 text-green-600" /> : <Copy className="w-5 h-5" />}
-                  </button>
-                </div>
+              <div className="mt-8 space-y-4 animate-in fade-in slide-in-from-bottom-2">
+                 <div className="p-6 bg-brand-ivory rounded-xl border border-brand-beige/50">
+                   <h3 className="text-lg font-display mb-4 text-stone-800">Generated Invitation</h3>
+                   <div className="whitespace-pre-wrap font-sans text-sm text-stone-600 mb-6 bg-white p-4 rounded-lg border border-brand-beige/30">
+                     {fullMessage}
+                   </div>
+                   
+                   <div className="flex flex-col sm:flex-row gap-3">
+                     <button
+                       onClick={handleCopyLink}
+                       className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-white border border-brand-beige-deep text-brand-beige-deep font-sans text-sm tracking-wide hover:bg-brand-beige/10 transition-colors"
+                     >
+                       {copiedLink ? <CheckCircle className="w-4 h-4 text-green-600" /> : <LinkIcon className="w-4 h-4" />}
+                       {copiedLink ? 'Copied Link!' : 'Copy Link Only'}
+                     </button>
+                     <button
+                       onClick={handleCopyMessage}
+                       className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-brand-beige-deep text-white font-sans text-sm tracking-wide shadow-md hover:bg-stone-800 transition-colors"
+                     >
+                       {copiedMessage ? <CheckCircle className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
+                       {copiedMessage ? 'Copied Message!' : 'Copy Full Message'}
+                     </button>
+                   </div>
+                 </div>
               </div>
             )}
           </div>
