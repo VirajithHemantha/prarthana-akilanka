@@ -5,10 +5,12 @@ import { Toaster } from 'sonner';
 
 import { EnvelopeOpening } from './components/EnvelopeOpening';
 import { Hero } from './components/Hero';
+import { Countdown } from './components/Countdown';
 import { CoupleDetails } from './components/CoupleDetails';
 import { CeremonyDetails } from './components/CeremonyDetails';
 import { Location } from './components/Location';
 import { Timeline } from './components/Timeline';
+import { WishesSection } from './components/WishesSection';
 
 export default function App() {
   const [showInvitation, setShowInvitation] = useState(false);
@@ -73,6 +75,17 @@ export default function App() {
 
       <Hero />
 
+      {/* Countdown Section */}
+      <div className="py-16 sm:py-24 bg-brand-ivory relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-display text-brand-beige-deep mb-4">The Countdown Begins</h2>
+            <div className="w-16 h-[1px] bg-brand-beige mx-auto"></div>
+          </div>
+          <Countdown targetDate={new Date('2026-08-27T09:30:00')} />
+        </div>
+      </div>
+
       <div className="py-24 sm:py-32 bg-gradient-to-b from-brand-ivory via-white to-brand-ivory relative">
         <CoupleDetails />
       </div>
@@ -87,6 +100,10 @@ export default function App() {
 
       <div className="py-24 sm:py-32 bg-brand-ivory relative">
         <Timeline />
+      </div>
+
+      <div className="py-24 sm:py-32 bg-white relative">
+        <WishesSection />
       </div>
 
       {/* Elegant Footer Signature */}

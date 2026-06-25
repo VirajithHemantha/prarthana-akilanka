@@ -32,7 +32,7 @@ export const WishesSection: React.FC = () => {
 
     try {
       // Send data to Google Sheets
-      const scriptUrl = 'https://script.google.com/macros/s/AKfycbyay20jbF63BRUj8JGGbUbYkYS3Us-DpLZc2Hs34si_qKJgxs_81xpNBniXsBNFsYOt7g/exec';
+      const scriptUrl = 'https://script.google.com/macros/s/AKfycbwkgye7kN78RVPdifa7TR1apKIPZG7QbwnhJfjbJEboTKRZcImjBhXHr3b2W4uiwgHhrg/exec';
       const payload = new FormData();
       payload.append('sheet', 'Wishes');
       payload.append('name', formData.name);
