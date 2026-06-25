@@ -78,7 +78,7 @@ export const Hero: React.FC = () => {
             <div className="hidden sm:block h-[1px] w-20 bg-gradient-to-r from-transparent to-brand-beige-deep/40" />
             <p className="text-[1.1rem] sm:text-2xl font-serif italic text-stone-700 tracking-wide px-4 text-center max-w-xl leading-relaxed drop-shadow-[0_2px_4px_rgba(255,255,255,0.5)]">
               {guestName ? (
-                <>We cordially invite <span className="font-bold not-italic text-brand-beige-deep">{prefix} {guestName}</span></>
+                <>We cordially invite <span className="font-bold not-italic text-brand-beige-deep bg-brand-beige/20 px-3 py-1 rounded-lg ml-1">{prefix} {guestName}</span></>
               ) : (
                 "Together with our families, we joyfully invite you to join us"
               )}

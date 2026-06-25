@@ -5,6 +5,7 @@ const PREFIXES = [
   'Mr.',
   'Mrs.',
   'Mr. & Mrs.',
+  'Family of',
   'Ms.',
   'Miss',
   'Dr.',
